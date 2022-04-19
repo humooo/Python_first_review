@@ -2,7 +2,7 @@ import string
 import itertools
 
 
-from alphabets import russian_alphabeth, symbols, symbols1
+from alphabets import russian_alphabeth, arabian_alphabeth, symbols, symbols_
 from get_stream import get_stream
 
 
@@ -17,8 +17,10 @@ def next_symbol(symbol, step):
             return chr(ord('А') + (ord(symbol) - ord('А') + step) % 33)
         else:
             return chr(ord('а') + (ord(symbol) - ord('а') + step) % 33)
-    elif symbol in symbols1:
-        return symbols[(symbols1[symbol] + step) % 5]
+    elif symbol in arabian_alphabeth:
+        return chr(1575 + (ord(symbol) - 1575 + step) % 28)
+    elif symbol in symbols_:
+        return symbols[(symbols_[symbol] + step) % 5]
     else:
         return symbol
 

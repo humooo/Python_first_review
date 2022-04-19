@@ -4,7 +4,7 @@ import pickle
 import string
 
 
-from alphabets import russian_alphabeth, symbols, symbols1
+from alphabets import russian_alphabeth, symbols, symbols_
 from encode_and_decode import vigenere
 from get_stream import get_stream
 from hack_and_train import count, diff
@@ -25,7 +25,7 @@ def coincident_index(text: str) -> float:
             len_1 += 1
     count_1 = dict(collections.Counter(symbol.lower() for symbol in text if symbol in
                    itertools.chain(string.ascii_letters,
-                                   russian_alphabeth, symbols1)))
+                                   russian_alphabeth, symbols_)))
     sum_1 = 0
     for symbol in string.ascii_lowercase:
         if symbol not in count_1:

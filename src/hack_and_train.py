@@ -4,14 +4,14 @@ import pickle
 import string
 
 
-from alphabets import russian_alphabeth, symbols, symbols1
+from alphabets import russian_alphabeth, symbols, symbols_
 from encode_and_decode import caesar, next_symbol
 from get_stream import get_stream
 
 
 def count(text):
     count_1 = dict(collections.Counter(symbol.lower() for symbol in text if symbol in
-                                       itertools.chain(string.ascii_letters, russian_alphabeth, symbols1)))
+                                       itertools.chain(string.ascii_letters, russian_alphabeth, symbols_)))
     sum_1 = sum(count_1.values())
     if sum_1:
         for l in count_1.keys():
