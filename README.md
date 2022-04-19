@@ -34,10 +34,10 @@
 
 
 ### Стеганография:
-> PYTHONPATH=src python3 steganography.py   --text-file {text.txt} --model-file{model} \
+> PYTHONPATH=src python3 stegano.py stegano_encode  --start-img {start.png|start.bmp} --encoded-img {encoded.png|encoded.bmp} [--input-file input.txt] \
 > \
 Шифрование
 
-> PYTHONPATH=src python3 steganography.py   --text-file {text.txt} --model-file{model} \
+> PYTHONPATH=src python3 stegano.py stegano_encode --encoded-img {encoded.png|encoded.bmp} [--output-file output.txt] \
 > \
 Расшифрование
