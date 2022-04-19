@@ -24,14 +24,14 @@ def next_symbol(symbol, step):
 
 
 def caesar(text, key, is_encode):
-    text1 = ''
+    text_ = ''
     for symbol in text:
-        text1 += next_symbol(symbol, key if is_encode else -key)
-    return text1
+        text_ += next_symbol(symbol, key if is_encode else -key)
+    return text_
 
 
 def vigenere(text, key, is_encode):
-    text1 = ''
+    text_ = ''
 
     for symbol, key1 in zip(text, itertools.cycle(key)):
         if key1 in string.ascii_letters:
@@ -42,11 +42,11 @@ def vigenere(text, key, is_encode):
             ord1 = symbols1[symbol]
         else:
             ord1 = 0
-        text1 += next_symbol(symbol, ord1 if is_encode else -ord1)
-    return text1
+        text_ += next_symbol(symbol, ord1 if is_encode else -ord1)
+    return text_
 
 
-def code_and_decode(cipher, key, input_, output_, is_encode):
+def encode_and_decode(cipher, key, input_, output_, is_encode):
     with get_stream(input_, 'r') as input_file:
         text = input_file.read()
     if cipher == 'caesar':
@@ -55,6 +55,6 @@ def code_and_decode(cipher, key, input_, output_, is_encode):
         text = vigenere(text, key, is_encode)
     elif cipher == 'vernam':
         with get_stream(key, 'r') as text_:
-            text = vernam(text, text_.read(), is_encode)
+            text = vigenere(text, text_.read(), is_encode)
     with get_stream(output_, 'w') as output_file:
         output_file.write(text)

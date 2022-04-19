@@ -60,10 +60,34 @@ def build_hack_vigenere_parser():
     return hack__vigenere_parser
 
 
+def build_stegano_encode_parser():
+    stegano_encode_parser = subs.add_parser('stegano_encode', description='Steganography encode')
+    stegano_encode_parser.set_defaults(method='encode')
+    stegano_encode_parser.add_argument('--start-img', required=True,
+                                             help='Name of start image', dest='start_img')
+    stegano_encode_parser.add_argument('--encoded-img', required=True,
+                                             help='Name of encoded image', dest='encoded_img')
+    stegano_encode_parser.add_argument('--input-file', required=False,
+                                             help='Name of input file', dest='input_file', default=sys.stdin)
+    return stegano_encode_parser
+
+
+def build_stegano_decode_parser():
+    stegano_decode_parser = subs.add_parser('stegano_decode', description='Steganography decode')
+    stegano_decode_parser.set_defaults(method='decode')
+    stegano_decode_parser.add_argument('--encoded-img', required=True,
+                                             help='Name of encoded image', dest='encoded_img')
+    stegano_decode_parser.add_argument('--output-file', required=False,
+                                             help='Name of output file', dest='output_file', default=sys.stdout)
+    return stegano_decode_parser
+
+
 command_parser = argparse.ArgumentParser()
 subs = command_parser.add_subparsers()
 encode_parser = build_encode_parser()
 decode_parser = build_decode_parser()
 train_parser = build_train_parser()
 hack_parser = build_hack_parser()
-hack_vigenere = build_hack_vigenere_parser()
+hack_vigenere_parser = build_hack_vigenere_parser()
+stegano_encode_parser = build_stegano_encode_parser()
+stegano_decode_parser = build_stegano_decode_parser()

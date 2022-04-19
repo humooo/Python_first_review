@@ -2,13 +2,13 @@
 
 ## Объязательная часть
 #### Шифрование:
->  PYTHONPATH=src python3 encryptor.py encode --cipher {caesar|vigenere|vernam} --key {<'number'>|<'word'>} [--input-file input.txt] [--output-file out.txt] \
+>  PYTHONPATH=src python3 encryptor.py encode --cipher {caesar|vigenere|vernam} --key {<'number'>|<'word'>|<'file'>} [--input-file input.txt] [--output-file out.txt] \
 > \
 Зашифровать входное сообщение с помощью ключа
 
 
 #### Дешифрование:
->  PYTHONPATH=src python3 encryptor.py decode --cipher {caesar|vigenere|vernam} --key {<'number'>|<'word'>} [--input-file input.txt] [--output-file out.txt] \
+>  PYTHONPATH=src python3 encryptor.py decode --cipher {caesar|vigenere|vernam} --key {<'number'>|<'word'>|<'file'>} [--input-file input.txt] [--output-file out.txt] \
 > \
 Расшифровать входное сообщение, зная шифр и ключ, с которым оно было зашифровано
 
@@ -31,3 +31,13 @@
 > PYTHONPATH=src python3 encryptor.py hack_vigenere [--input-file input.txt] [--output-file output.txt] --model-file{model} \
 > \
 > Рассшифровать текст
+
+
+### Стеганография:
+> PYTHONPATH=src python3 steganography.py   --text-file {text.txt} --model-file{model} \
+> \
+Шифрование
+
+> PYTHONPATH=src python3 steganography.py   --text-file {text.txt} --model-file{model} \
+> \
+Расшифрование

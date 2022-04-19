@@ -1,6 +1,6 @@
 import sys
 
-from encode_and_decode import code_and_decode
+from encode_and_decode import encode_and_decode
 from hack_and_train import hack, train
 from hack_vigenere import hack_vigenere
 import parser
@@ -9,9 +9,9 @@ import parser
 def main():
     args = parser.command_parser.parse_args()
     if args.method == 'encode':
-        code_and_decode(args.cipher, args.key, args.input_file, args.output_file, is_encode=True)
+        encode_and_decode(args.cipher, args.key, args.input_file, args.output_file, is_encode=True)
     elif args.method == 'decode':
-        code_and_decode(args.cipher, args.key, args.input_file, args.output_file, is_encode=False)
+        encode_and_decode(args.cipher, args.key, args.input_file, args.output_file, is_encode=False)
     elif args.method == 'train':
         train(args.text_file, args.model_file)
     elif args.method == 'hack':
