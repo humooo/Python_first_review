@@ -1,7 +1,9 @@
-import sys
-
 from get_stream import get_stream
 from PIL import Image
+
+
+def to_bit_massage(message):
+    return [bin(ord(x))[2:].rjust(8, "0") for x in message]
 
 
 def encode(input_image, secret_image, input_file):
@@ -13,7 +15,7 @@ def encode(input_image, secret_image, input_file):
     i = 0
 
     message = str(len(message)) + ":" + str(message)
-    message_bits = "".join([bin(ord(x))[2:].rjust(8, "0") for x in message])
+    message_bits = "".join(to_bit_massage(message))
     message_bits += "0" * ((3 - (len(message_bits) % 3)) % 3)
 
     for row in range(height):
@@ -34,6 +36,7 @@ def encode(input_image, secret_image, input_file):
                 img.close()
                 break
     encoded.save(secret_image)
+    return secret_image
 
 
 def decode(secret_image):
@@ -63,5 +66,3 @@ def decode(secret_image):
             if len(a) - len(str(limit)) - 1 == limit:
                 img.close()
                 return "".join(a)[len(str(limit)) + 1 :]
-    # with get_stream(output_file, 'w') as output_file:
-    #    output_file.write(massage)

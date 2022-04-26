@@ -50,10 +50,11 @@ def find_key(text: str, len_key_text: int, model_) -> str:
     return key
 
 
-def hack_vigenere(input_, output_, model_):
-    with get_stream(input_, 'r') as input_file:
+def hack_vigenere(input_file, output_file, model_):
+    with get_stream(input_file, 'r') as input_file:
         text = input_file.read()
     key = find_key(text, len_key(text), model_)
     text = vigenere(text, key, is_encode=False)
-    with get_stream(output_, 'w') as output_file:
+    with get_stream(output_file, 'w') as output_file:
         output_file.write(text)
+    return output_file

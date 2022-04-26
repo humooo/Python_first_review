@@ -19,11 +19,12 @@ def count(text):
     return count_1
 
 
-def train(text_, model_):
-    with get_stream(text_, 'r') as text_file:
+def train(text_file, model_file):
+    with get_stream(text_file, 'r') as text_file:
         text = text_file.read()
-    with open(model_, 'wb') as model_file:
+    with open(model_file, 'wb') as model_file:
         pickle.dump(count(text), model_file)
+    return model_file
 
 
 def diff(step, mod, count_):
@@ -33,13 +34,14 @@ def diff(step, mod, count_):
     return sum_2
 
 
-def hack(input_, output_, model_):
-    with open(model_, 'rb') as model_file:
+def hack(input_file, output_file, model_file):
+    with open(model_file, 'rb') as model_file:
         value_in_model_file = pickle.load(model_file)
-    with get_stream(input_, 'r') as input_file:
+    with get_stream(input_file, 'r') as input_file:
         text = input_file.read()
     min_step = 26 - min(range(26), key=lambda step:
                         diff(step, value_in_model_file, count(text)))
     text = caesar(text, min_step, is_encode=False)
-    with get_stream(output_, 'w') as output_file:
+    with get_stream(output_file, 'w') as output_file:
         output_file.write(text)
+    return output_file

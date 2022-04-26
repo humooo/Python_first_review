@@ -3,26 +3,27 @@ import itertools
 
 
 from alphabets import russian_alphabeth, arabian_alphabeth, symbols, symbols_
+from alphabets import len_symbols, len_arabian_alphabeth, len_english_alphabeth, len_russian_alphabeth
+from alphabets import ord_first_arabian_symbol
 from get_stream import get_stream
 
 
 def next_symbol(symbol, step):
     if symbol in string.ascii_letters:
         if symbol.isupper():
-            return chr(ord('A') + (ord(symbol) - ord('A') + step) % 26)
+            return chr(ord('A') + (ord(symbol) - ord('A') + step) % len_russian_alphabeth)
         else:
-            return chr(ord('a') + (ord(symbol) - ord('a') + step) % 26)
+            return chr(ord('a') + (ord(symbol) - ord('a') + step) % len_russian_alphabeth)
     elif symbol in russian_alphabeth:
         if symbol.isupper():
-            return chr(ord('А') + (ord(symbol) - ord('А') + step) % 33)
+            return chr(ord('А') + (ord(symbol) - ord('А') + step) % len_english_alphabeth)
         else:
-            return chr(ord('а') + (ord(symbol) - ord('а') + step) % 33)
+            return chr(ord('а') + (ord(symbol) - ord('а') + step) % len_english_alphabeth)
     elif symbol in arabian_alphabeth:
-        return chr(1575 + (ord(symbol) - 1575 + step) % 28)
+        return chr(ord_first_arabian_symbol + (ord(symbol) - ord_first_arabian_symbol + step) % len_arabian_alphabeth)
     elif symbol in symbols_:
-        return symbols[(symbols_[symbol] + step) % 5]
-    else:
-        return symbol
+        return symbols[(symbols_[symbol] + step) % len_symbols]
+    return symbol
 
 
 def caesar(text, key, is_encode):
@@ -48,8 +49,8 @@ def vigenere(text, key, is_encode):
     return text_
 
 
-def encode_and_decode(cipher, key, input_, output_, is_encode):
-    with get_stream(input_, 'r') as input_file:
+def encode_and_decode(cipher, key, input_file, output_file, is_encode):
+    with get_stream(input_file, 'r') as input_file:
         text = input_file.read()
     if cipher == 'caesar':
         text = caesar(text, int(key), is_encode)
@@ -58,5 +59,6 @@ def encode_and_decode(cipher, key, input_, output_, is_encode):
     elif cipher == 'vernam':
         with get_stream(key, 'r') as text_:
             text = vigenere(text, text_.read(), is_encode)
-    with get_stream(output_, 'w') as output_file:
+    with get_stream(output_file, 'w') as output_file:
         output_file.write(text)
+    return output_file
