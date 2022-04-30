@@ -4,6 +4,9 @@ import sys
 
 @contextlib.contextmanager
 def get_stream(stream, mode):
+    """
+    a context manager for files, which can be default standard input or output
+    """
     if stream == sys.stdin:
         file = sys.stdin
     elif stream == sys.stdout:

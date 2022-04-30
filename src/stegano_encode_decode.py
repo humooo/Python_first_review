@@ -2,11 +2,31 @@ from get_stream import get_stream
 from PIL import Image
 
 
-def to_bit_massage(message):
+def to_bit_message(message):
+    """
+    converting each character of the text into its bits
+    >> to_bit_message('Hubba bubba')
+    ['01001000',
+    '01110101',
+    '01100010',
+    '01100010',
+    '01100001',
+    '00100000',
+    '01100010',
+    '01110101',
+    '01100010',
+    '01100010',
+    '01100001']
+    >> "".join(to_bit_massage('Hubba bubba'))
+    '0100100001110101011000100110001001100001001000000110001001110101011000100110001001100001'
+    """
     return [bin(ord(x))[2:].rjust(8, "0") for x in message]
 
 
 def encode(input_image, secret_image, input_file):
+    """
+    encrypting (hiding) text with the last bit
+    """
     with get_stream(input_file, 'r') as input_file:
         message = input_file.read()
     img = Image.open(input_image)
@@ -40,6 +60,9 @@ def encode(input_image, secret_image, input_file):
 
 
 def decode(secret_image):
+    """
+    decryption (disclosure) of the text using the last bit
+    """
     img = Image.open(secret_image)
     width, height = img.size
     buff, count = 0, 0
