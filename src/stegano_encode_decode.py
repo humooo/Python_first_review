@@ -35,7 +35,7 @@ def encode(input_image, secret_image, input_file):
     i = 0
 
     message = str(len(message)) + ":" + str(message)
-    message_bits = "".join(to_bit_massage(message))
+    message_bits = "".join(to_bit_message(message))
     message_bits += "0" * ((3 - (len(message_bits) % 3)) % 3)
 
     for row in range(height):

@@ -21,14 +21,14 @@ def next_symbol(symbol, step):
     """
     if symbol in string.ascii_letters:
         if symbol.isupper():
-            return chr(ord('A') + (ord(symbol) - ord('A') + step) % len_russian_alphabeth)
+            return chr(ord('A') + (ord(symbol) - ord('A') + step) % len_english_alphabeth)
         else:
-            return chr(ord('a') + (ord(symbol) - ord('a') + step) % len_russian_alphabeth)
+            return chr(ord('a') + (ord(symbol) - ord('a') + step) % len_english_alphabeth)
     elif symbol in russian_alphabeth:
         if symbol.isupper():
-            return chr(ord('А') + (ord(symbol) - ord('А') + step) % len_english_alphabeth)
+            return chr(ord('А') + (ord(symbol) - ord('А') + step) % len_russian_alphabeth)
         else:
-            return chr(ord('а') + (ord(symbol) - ord('а') + step) % len_english_alphabeth)
+            return chr(ord('а') + (ord(symbol) - ord('а') + step) % len_russian_alphabeth)
     elif symbol in arabian_alphabeth:
         return chr(ord_first_arabian_symbol + (ord(symbol) - ord_first_arabian_symbol + step) % len_arabian_alphabeth)
     elif symbol in symbols_:
@@ -58,7 +58,7 @@ def vigenere(text, key, is_encode):
         elif symbol in russian_alphabeth:
             ord1 = ord(key1.lower()) - ord('а')
         elif symbol in symbols:
-            ord1 = symbols_[symbol]
+            ord1 = symbols[symbol]
         else:
             ord1 = 0
         text_ += next_symbol(symbol, ord1 if is_encode else -ord1)

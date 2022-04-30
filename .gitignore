@@ -2,3 +2,6 @@
 __pycache__/
 main.py
 src/__pycache__/
+IMG/encoded*
+model_.txt
+output.txt
