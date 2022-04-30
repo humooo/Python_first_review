@@ -67,7 +67,7 @@
 > PYTHONPATH=src python3 stegano.py stegano_encode  --start-img {start.png|start.bmp} --encoded-img {encoded.png|encoded.bmp} [--input-file input.txt] \
 > \
 Шифрование
-![](IMG/8.png)
+![](IMG/9.png)
 Можно заметить, что фотографии практически ничем не отличаются 
 
 
