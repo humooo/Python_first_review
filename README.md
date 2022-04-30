@@ -1,43 +1,77 @@
 # Первое ревью
 
-## Объязательная часть
-#### Шифрование:
->  PYTHONPATH=src python3 encryptor.py encode --cipher {caesar|vigenere|vernam} --key {<'number'>|<'word'>|<'file'>} [--input-file input.txt] [--output-file out.txt] \
+
+#### Шифрование шифра Цезаря:
+>  PYTHONPATH=src python3 encryptor.py encode --cipher caesar --key {number} [--input-file input.txt] [--output-file out.txt] \
 > \
 Зашифровать входное сообщение с помощью ключа
+![](IMG/1.png)
 
 
-#### Дешифрование:
->  PYTHONPATH=src python3 encryptor.py decode --cipher {caesar|vigenere|vernam} --key {<'number'>|<'word'>|<'file'>} [--input-file input.txt] [--output-file out.txt] \
+#### Дешифрование шифра Цезаря:
+>  PYTHONPATH=src python3 encryptor.py decode --cipher caesar --key {number} [--input-file input.txt] [--output-file out.txt] \
 > \
-Расшифровать входное сообщение, зная шифр и ключ, с которым оно было зашифровано
+Расшифровать входное сообщение, зная ключ, с которым оно было зашифровано
+![](IMG/2.png)
+
+
+#### Шифрование шифра Виженера:
+>  PYTHONPATH=src python3 encryptor.py encode --cipher vigenere --key {word} [--input-file input.txt] [--output-file out.txt] \
+> \
+Зашифровать входное сообщение с помощью ключа
+![](IMG/3.png)
+
+
+#### Дешифрование шифра Виженера:
+>  PYTHONPATH=src python3 encryptor.py decode --cipher vigenere --key {word} [--input-file input.txt] [--output-file out.txt] \
+> \
+Расшифровать входное сообщение, зная ключ, с которым оно было зашифровано
+![](IMG/4.png)
+
+
+#### Шифрование шифра Вернама:
+>  PYTHONPATH=src python3 encryptor.py encode --cipher vernam --key {text_key.txt} [--input-file input.txt] [--output-file out.txt] \
+> \
+Зашифровать входное сообщение с помощью ключа
+![](IMG/5.png)
+
+
+#### Дешифрование шифра Вернама:
+>  PYTHONPATH=src python3 encryptor.py decode --cipher vernam --key {text_key.txt} [--input-file input.txt] [--output-file out.txt] \
+> \
+Расшифровать входное сообщение, зная ключ, с которым оно было зашифровано
+![](IMG/6.png)
+
+#### Построить языковую модель для взлома:
+
+> PYTHONPATH=src python3 encryptor.py train  --text-file text.txt --model-file model.txt \
+> \
+> Проанализировать большой текст(текст Шекспира) и построить языковую модель
 
 
 #### Взлом шифра Цезаря методами частотного анализа:
-> PYTHONPATH=src python3 encryptor.py train  --text-file {text.txt} --model-file{model} \
-> \
-> Проанализировать большой текст(текст Шекспира) и построить языковую модель
 
-> PYTHONPATH=src python3 encryptor.py hack [--input-file input.txt] [--output-file output.txt] --model-file{model} \
+> PYTHONPATH=src python3 encryptor.py hack [--input-file input.txt] [--output-file output.txt] --model-file model.txt \
 > \
 > Рассшифровать текст
+![](IMG/7.png)
 
-## Бонусная часть
-#### Взлом шифра виженера с помощью индексов совпадений:
-> PYTHONPATH=src python3 encryptor.py train  --text-file {text.txt} --model-file{model} \
-> \
-> Проанализировать большой текст(текст Шекспира) и построить языковую модель
 
-> PYTHONPATH=src python3 encryptor.py hack_vigenere [--input-file input.txt] [--output-file output.txt] --model-file{model} \
+#### Взлом шифра Виженера с помощью индексов совпадений:
+> PYTHONPATH=src python3 encryptor.py hack_vigenere [--input-file input.txt] [--output-file output.txt] --model-file model.txt \
 > \
 > Рассшифровать текст
-
+![](IMG/8.png)
 
 ### Стеганография:
 > PYTHONPATH=src python3 stegano.py stegano_encode  --start-img {start.png|start.bmp} --encoded-img {encoded.png|encoded.bmp} [--input-file input.txt] \
 > \
 Шифрование
+![](IMG/8.png)
+Можно заметить, что фотографии практически ничем не отличаются 
+
 
 > PYTHONPATH=src python3 stegano.py stegano_encode --encoded-img {encoded.png|encoded.bmp} [--output-file output.txt] \
 > \
 Расшифрование
+![](IMG/10.png)
