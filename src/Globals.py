@@ -1,6 +1,3 @@
-import string
-
-
 russian_alphabeth = 'йцукенгшщзхъфывапролджэячсмитьбюё'
 russian_alphabeth += 'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ'
 arabian_alphabeth = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي'
@@ -11,3 +8,6 @@ len_arabian_alphabeth = len(arabian_alphabeth)
 len_symbols = len(symbols)
 len_english_alphabeth = 26
 ord_first_arabian_symbol = 1575
+matches_index = 0.065
+polyalphabetic_matchs_index = 0.038
+fraction = 0.027

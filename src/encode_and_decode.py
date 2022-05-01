@@ -1,10 +1,8 @@
-import string
 import itertools
+import string
 
-
-from alphabets import russian_alphabeth, arabian_alphabeth, symbols, symbols_
-from alphabets import len_symbols, len_arabian_alphabeth, len_english_alphabeth, len_russian_alphabeth
-from alphabets import ord_first_arabian_symbol
+from Globals import arabian_alphabeth, len_arabian_alphabeth, len_english_alphabeth, len_russian_alphabeth
+from Globals import len_symbols, ord_first_arabian_symbol, russian_alphabeth, symbols, symbols_
 from get_stream import get_stream
 
 
@@ -70,6 +68,10 @@ def encode_and_decode(cipher, key, input_file, output_file, is_encode):
     A function that takes the output text and, depending on
     the encryption method, encrypts or decrypts the text and
     returns it
+
+    cipher: cipher type - vegenere, caesar or vernam
+    input_file: the input file, by default this is standard input
+    output_file: the output file, by default, is the standard output
     """
     with get_stream(input_file, 'r') as input_file:
         text = input_file.read()

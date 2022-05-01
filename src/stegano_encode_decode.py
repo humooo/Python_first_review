@@ -26,6 +26,10 @@ def to_bit_message(message):
 def encode(input_image, secret_image, input_file):
     """
     encrypting (hiding) text with the last bit
+
+    input_image: the input image in which we want to hide the text
+    secret_image: the received image, in which the text is hidden
+    input_file: the text itself
     """
     with get_stream(input_file, 'r') as input_file:
         message = input_file.read()
@@ -61,7 +65,7 @@ def encode(input_image, secret_image, input_file):
 
 def decode(secret_image):
     """
-    decryption (disclosure) of the text using the last bit
+    decryption (disclosure) of the text using the last bit of the image
     """
     img = Image.open(secret_image)
     width, height = img.size
