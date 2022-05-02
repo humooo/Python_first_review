@@ -1,0 +1,8 @@
+.idea/
+__pycache__/
+venv
+main.py
+src/__pycache__/
+IMG/encoded*
+model_.txt
+output.txt
