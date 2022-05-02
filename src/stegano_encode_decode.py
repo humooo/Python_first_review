@@ -1,3 +1,4 @@
+from Globals import third_pixel
 from get_stream import get_stream
 from PIL import Image
 
@@ -5,22 +6,10 @@ from PIL import Image
 def to_bit_message(message):
     """
     converting each character of the text into its bits
-    >> to_bit_message('Hubba bubba')
-    ['01001000',
-    '01110101',
-    '01100010',
-    '01100010',
-    '01100001',
-    '00100000',
-    '01100010',
-    '01110101',
-    '01100010',
-    '01100010',
-    '01100001']
-    >> "".join(to_bit_massage('Hubba bubba'))
-    '0100100001110101011000100110001001100001001000000110001001110101011000100110001001100001'
     """
-    return [bin(ord(x))[2:].rjust(8, "0") for x in message]
+    bit_message = [bin(ord(x))[2:] for x in message]
+    bit_message = [x.rjust(8, '0') for x in bit_message]
+    return bit_message
 
 
 def encode(input_image, secret_image, input_file):
@@ -40,22 +29,22 @@ def encode(input_image, secret_image, input_file):
 
     message = str(len(message)) + ":" + str(message)
     message_bits = "".join(to_bit_message(message))
-    message_bits += "0" * ((3 - (len(message_bits) % 3)) % 3)
+    message_bits += "0" * ((third_pixel - (len(message_bits) % third_pixel)) % third_pixel)
 
     for row in range(height):
         for col in range(width):
-            if i + 3 <= len(message_bits):
+            if i + third_pixel <= len(message_bits):
                 pixel = img.getpixel((col, row))
                 r = pixel[0] & ~1 | int(message_bits[i])
                 g = pixel[1] & ~1 | int(message_bits[i + 1])
                 b = pixel[2] & ~1 | int(message_bits[i + 2])
 
                 if img.mode == "RGBA":
-                    encoded.putpixel((col, row), (r, g, b, pixel[3]))
+                    encoded.putpixel((col, row), (r, g, b, pixel[third_pixel]))
                 else:
                     encoded.putpixel((col, row), (r, g, b))
 
-                i += 3
+                i += third_pixel
             else:
                 img.close()
                 break
@@ -77,7 +66,7 @@ def decode(secret_image):
         for col in range(width):
             pixel = img.getpixel((col, row))
             if img.mode == "RGBA":
-                pixel = pixel[:3]
+                pixel = pixel[:third_pixel]
             for color in pixel:
                 buff += (color & 1) << (7 - count)
                 count += 1

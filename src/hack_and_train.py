@@ -13,6 +13,7 @@ def count(text):
     a function that counts for each character the number of
     times the specified character occurs in the text and
     returns a dictionary of them
+    text: a large text, for each of its characters we will count the number of
     """
     count_1 = dict(collections.Counter(symbol.lower() for symbol in text if symbol in
                                        itertools.chain(string.ascii_letters, russian_alphabeth,
@@ -47,7 +48,8 @@ def diff(step, mod, count_):
     """
     sum_2 = 0
     for symbol in count_:
-        sum_2 += abs(mod[next_symbol(symbol, step)] - count_[symbol])
+        next_symb = abs(mod[next_symbol(symbol, step)] - count_[symbol])
+        sum_2 += next_symb
     return sum_2
 
 

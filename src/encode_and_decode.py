@@ -10,33 +10,33 @@ def next_symbol(symbol, step):
     """
     A function that takes one character and returns another character by a certain step modulo n,
     depending on the alphabet
-    >> next_symbol('a', 5)
-    'f'
-    >> next_symbol('ф', 5)
-    'щ'
-    >> next_symbol('.', 6)
-    '?'
+    symbol: for it, we will return another character that differs from this one by step modulo the length of the alphabet
+    step: in the case of encryption, this is a positive number, in the case of decryption, it is negative
     """
+    res = symbol
     if symbol in string.ascii_letters:
         if symbol.isupper():
-            return chr(ord('A') + (ord(symbol) - ord('A') + step) % len_english_alphabeth)
+            res = chr(ord('A') + (ord(symbol) - ord('A') + step) % len_english_alphabeth)
         else:
-            return chr(ord('a') + (ord(symbol) - ord('a') + step) % len_english_alphabeth)
+            res = chr(ord('a') + (ord(symbol) - ord('a') + step) % len_english_alphabeth)
     elif symbol in russian_alphabeth:
         if symbol.isupper():
-            return chr(ord('А') + (ord(symbol) - ord('А') + step) % len_russian_alphabeth)
+            res = chr(ord('А') + (ord(symbol) - ord('А') + step) % len_russian_alphabeth)
         else:
-            return chr(ord('а') + (ord(symbol) - ord('а') + step) % len_russian_alphabeth)
+            res = chr(ord('а') + (ord(symbol) - ord('а') + step) % len_russian_alphabeth)
     elif symbol in arabian_alphabeth:
-        return chr(ord_first_arabian_symbol + (ord(symbol) - ord_first_arabian_symbol + step) % len_arabian_alphabeth)
+        res = chr(ord_first_arabian_symbol + (ord(symbol) - ord_first_arabian_symbol + step) % len_arabian_alphabeth)
     elif symbol in symbols_:
-        return symbols[(symbols_[symbol] + step) % len_symbols]
-    return symbol
+        res = symbols[(symbols_[symbol] + step) % len_symbols]
+    return res
 
 
 def caesar(text, key, is_encode):
     """
     For encrypting and decrypting the Caesar cipher
+    text: the name of the file we want to encrypt or decrypt
+    key: the key (for this cipher is a number) for encryption/decryption
+    is_encode: True - in the case of encryption, False - in the case of decryption
     """
     text_ = ''
     for symbol in text:
@@ -47,6 +47,9 @@ def caesar(text, key, is_encode):
 def vigenere(text, key, is_encode):
     """
     For encrypting and decrypting the Vigenere cipher
+    text: the name of the file we want to encrypt or decrypt
+    key: the key (for this cipher is a string) for encryption/decryption
+    is_encode: True - in the case of encryption, False - in the case of decryption
     """
     text_ = ''
 

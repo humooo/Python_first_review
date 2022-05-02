@@ -1,7 +1,8 @@
+import parser
+
 from encode_and_decode import encode_and_decode
 from hack_and_train import hack, train
 from hack_vigenere import hack_vigenere
-import parser
 
 
 def main():

@@ -11,3 +11,4 @@ ord_first_arabian_symbol = 1575
 matches_index = 0.065
 polyalphabetic_matchs_index = 0.038
 fraction = 0.027
+third_pixel = 3
